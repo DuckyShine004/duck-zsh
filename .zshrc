@@ -52,7 +52,9 @@ typeset -U path
 # BREW MUST BE FIRST
 path=(
     "/opt/homebrew/bin"
+    "/opt/homebrew/opt/postgresql@16/bin"
     "/usr/local/bin"
+    "$(go env GOPATH)/bin"
     "$HOME/.local/bin"
     "$HOME/.cargo/bin"
     "$PYENV_ROOT/bin"
