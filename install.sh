@@ -1,5 +1,7 @@
 #!/bin/bash
 
+OS_NAME=$(uname -s)
+
 ZSH_CUSTOM_PLUGINS_PATH=$ZSH_CUSTOM/plugins
 ZSH_CUSTOM_THEME_PATH=$ZSH_CUSTOM/themes
 
@@ -62,6 +64,34 @@ change_script_permissions() {
     find scripts -type f -name "*.sh" -exec chmod +x {} \;
 }
 
+install_bat_theme() {
+    echo -e "Installing bat (root permission required)\n"
+
+    if [[ "$OS_NAME" == "Darwin" ]]; then
+        brew install bat
+    else
+        sudo pacman -Sy bat
+    fi
+
+    echo -e "bat installed\n"
+    echo -e "Installing bat themes\n"
+
+    # TODO: Refactor theme install code
+    curl -L -o "$(bat --config-dir)/themes/Catppuccin Latte.tmTheme" \
+        https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
+
+    curl -L -o "$(bat --config-dir)/themes/Catppuccin Frappe.tmTheme" \
+        https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+
+    curl -L -o "$(bat --config-dir)/themes/Catppuccin Macchiato.tmTheme" \
+        https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+
+    curl -L -o "$(bat --config-dir)/themes/Catppuccin Mocha.tmTheme" \
+        https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+
+    echo '--theme="Catppuccin Mocha"' >>"$(bat --config-file)"
+}
+
 # ZSH setup
 install_plugins
 install_theme
@@ -71,3 +101,6 @@ create_workspace_file
 
 # Change permissions for scripts
 change_script_permissions
+
+# Install bat theme
+install_bat_theme
