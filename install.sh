@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ZSH_CUSTOM_PLUGINS_PATH=$ZSH_CUSTOM/plugins
+ZSH_CUSTOM_THEME_PATH=$ZSH_CUSTOM/themes
 
 PLUGIN_LINKS=(
     "https://github.com/zsh-users/zsh-autosuggestions.git"
@@ -15,16 +16,31 @@ PLUGIN_NAMES=(
     "zsh-syntax-highlighting"
 )
 
+THEME_DIRECTORY=themes
+
 install_plugins() {
-    echo "Installing ZSH Plugins"
+    echo -e "Installing ZSH Plugins...\n"
 
     number_of_plugins=${#PLUGIN_LINKS[@]}
 
     for ((i = 0; i < number_of_plugins; i++)); do
-        local clone_directory="$ZSH_CUSTOM_PLUGINS_PATH/${PLUGIN_NAMES[$i]}"
+        local plugin_directory="$ZSH_CUSTOM_PLUGINS_PATH/${PLUGIN_NAMES[$i]}"
 
-        git clone "${PLUGIN_LINKS[$i]}" $clone_directory
+        git clone "${PLUGIN_LINKS[$i]}" $plugin_directory
+
+        echo
     done
+
+    echo -e "Plugins Installed!"
+}
+
+install_theme() {
+    echo -e "Copying Custom Themes...\n"
+
+    cp -f $THEME_DIRECTORY/* $ZSH_CUSTOM_THEME_PATH
+
+    echo -e "Themes Copied!"
 }
 
 install_plugins
+install_theme
