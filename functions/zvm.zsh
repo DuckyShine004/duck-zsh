@@ -1,0 +1,3 @@
+function zvm() {
+    ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+}
