@@ -10,6 +10,7 @@ find-file() {
         -E .next \
         -E __pycache__ \
         -E .venv \
+        -E lib \
         -E .cache |
         fzf \
             --height=100% \
