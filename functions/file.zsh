@@ -1,3 +1,5 @@
+FZF_PREVIEW=$HOME/.config/zsh/scripts/fzf/fzf-preview.sh
+
 find-file() {
     sudo -v 2>/dev/null || true
 
@@ -21,5 +23,5 @@ find-file() {
             --marker='⇒' \
             --color=bg+:-1,gutter:-1 \
             --bind='tab:down,btab:up' \
-            --preview 'fzf-preview.sh {}'
+            --preview "$FZF_PREVIEW {}"
 }

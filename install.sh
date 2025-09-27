@@ -50,10 +50,16 @@ create_workspace_file() {
     if [ ! -e "$WORKSPACE_FILE" ]; then
         touch "$WORKSPACE_FILE"
 
-        echo -e "File '$WORKSPACE_FILE' created"
+        echo -e "File '$WORKSPACE_FILE' created\n"
     else
-        echo -e "File '$WORKSPACE_FILE' already exists"
+        echo -e "File '$WORKSPACE_FILE' already exists\n"
     fi
+}
+
+change_script_permissions() {
+    echo -e "Changing script permissions\n"
+
+    find scripts -type f -name "*.sh" -exec chmod +x {} \;
 }
 
 # ZSH setup
@@ -62,3 +68,6 @@ install_theme
 
 # Miscellaneous setup
 create_workspace_file
+
+# Change permissions for scripts
+change_script_permissions
