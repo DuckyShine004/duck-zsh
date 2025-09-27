@@ -49,7 +49,10 @@ export PYTHONPATH="$(python3 -m site --user-site):$PYTHONPATH"
 # Path variables
 typeset -U path
 
+# BREW MUST BE FIRST
 path=(
+    "/opt/homebrew/bin"
+    "/usr/local/bin"
     "$HOME/.local/bin"
     "$HOME/.cargo/bin"
     "$PYENV_ROOT/bin"

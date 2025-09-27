@@ -1,2 +1,8 @@
 # zsh plugins
 .oh-my-zsh/
+
+# zsh logs
+.zcompdump*
+
+# zsh history
+.zsh_history
