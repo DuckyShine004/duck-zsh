@@ -3,6 +3,8 @@
 ZSH_CUSTOM_PLUGINS_PATH=$ZSH_CUSTOM/plugins
 ZSH_CUSTOM_THEME_PATH=$ZSH_CUSTOM/themes
 
+WORKSPACE_FILE=$HOME/.workspaces
+
 PLUGIN_LINKS=(
     "https://github.com/zsh-users/zsh-autosuggestions.git"
     "https://github.com/jeffreytse/zsh-vi-mode.git"
@@ -39,8 +41,24 @@ install_theme() {
 
     cp -f $THEME_DIRECTORY/* $ZSH_CUSTOM_THEME_PATH
 
-    echo "Themes Copied!"
+    echo -e "Themes Copied!\n"
 }
 
+create_workspace_file() {
+    echo -e "Creating workspace file in '$WORKSPACE_FILE'\n"
+
+    if [ ! -e "$WORKSPACE_FILE" ]; then
+        touch "$WORKSPACE_FILE"
+
+        echo -e "File '$WORKSPACE_FILE' created"
+    else
+        echo -e "File '$WORKSPACE_FILE' already exists"
+    fi
+}
+
+# ZSH setup
 install_plugins
 install_theme
+
+# Miscellaneous setup
+create_workspace_file

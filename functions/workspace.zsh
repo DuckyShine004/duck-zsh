@@ -12,12 +12,12 @@ function workspace-add() {
         path=$(pwd)
     fi
 
-    echo "${name}=${path}" >> ~/.workspaces
+    echo "${name}=${path}" >>~/.workspaces
     echo "Workspace '${name}: ${path}' added"
 }
 
 function workspace-open() {
-    local workspace=$(cat ~/.workspaces | \
+    local workspace=$(cat ~/.workspaces |
         fzf --height 60% \
             --border sharp \
             --layout=reverse \
@@ -25,9 +25,9 @@ function workspace-open() {
             --pointer='▶' \
             --marker='⇒' \
             --color=bg+:-1,gutter:-1 \
-            --bind='tab:down,btab:up' \
-            | cut -d '=' -f 1)
-  
+            --bind='tab:down,btab:up' |
+        cut -d '=' -f 1)
+
     if [ -n "$workspace" ]; then
         local path=$(grep "^${workspace}=" ~/.workspaces | cut -d '=' -f 2-)
 
