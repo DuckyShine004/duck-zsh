@@ -31,7 +31,7 @@ install_plugins() {
         echo
     done
 
-    echo -e "Plugins Installed!"
+    echo -e "Plugins Installed!\n"
 }
 
 install_theme() {
@@ -39,7 +39,7 @@ install_theme() {
 
     cp -f $THEME_DIRECTORY/* $ZSH_CUSTOM_THEME_PATH
 
-    echo -e "Themes Copied!"
+    echo "Themes Copied!"
 }
 
 install_plugins
