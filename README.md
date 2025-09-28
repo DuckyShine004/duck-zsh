@@ -17,11 +17,10 @@ This section will guide you through installing *duck-zsh*.
 * [fzf](https://github.com/junegunn/fzf) is required for custom Zsh functions.
 
 ### Installation
-After you have met the requirements, proceed to following the installation steps.
+After you have met the requirements, proceed to following the installation steps. 
 
-<br>
+1) Clone the repository using the following command:
 
-Clone the repository using the following command:
 ```sh
 # Make .config directory if your system doesn't already have one
 mkdir -p $HOME/.config
@@ -36,8 +35,7 @@ git clone https://github.com/DuckyShine004/duck-zsh.git $HOME/.config/zsh
 > [!WARNING]
 > If you already have a Zsh setup, make sure to back it up before proceeding further. 
 
-After cloning the repository:
-1) Run the `install.sh` script:
+2) After cloning the repository, run the `install.sh` script:
 
 ```sh
 # Go into Zsh directory
@@ -50,7 +48,8 @@ chmod +x install.sh
 ./install.sh
 ```
 
-2) Create symlinks for Zsh configuration files:
+3) Create symlinks for Zsh configuration files:
+
 ```sh
 ln -s $HOME/.config/zsh $HOME/.zshenv
 
@@ -59,7 +58,7 @@ ln -s $HOME/.config/zsh $HOME/.zprofile
 ln -s $HOME/.config/zsh $HOME/.zshrc
 ```
 
-3) Finally, source the configuration:
+4) Finally, source the configuration:
 ```sh
 source $HOME/.zshrc
 ```
