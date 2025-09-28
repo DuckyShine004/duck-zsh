@@ -10,7 +10,7 @@ duck-zsh is my personal Zsh configuration.
     - [Screenshots](#screenshots)
 
 ## Getting Started
-This section will guide you through installing *duck-zsh*.
+This section will guide you through installing **duck-zsh**.
 
 ### Requirements
 * [oh-my-zsh](https://ohmyz.sh/) manages your Zsh configuration.
