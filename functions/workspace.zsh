@@ -36,7 +36,7 @@ function workspace-open() {
                 --preview='bash -c "
           path=\$1
           if [ -d \"\$path\" ]; then
-            tree -aC --prune -I '\''node_modules|.git|.venv|__pycache__|clangd|CMakeFiles|build|lib'\'' -- \"\$path\"
+            tree -dC --prune -I '\''node_modules|.git|.venv|__pycache__|clangd|CMakeFiles|build|lib|Library|Samples|Temp'\'' -- \"\$path\"
           else
             echo \"Missing directory: \$path\"
           fi

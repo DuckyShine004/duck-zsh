@@ -25,7 +25,7 @@ find-directory() {
             {
                 printf '%s\n' ".."
                 printf '%s\n' "[Open here]"
-                fd -a -t d -d 1 . "$current_dir" -HI -E .git -E .venv -E node_modules -E __pycache__ -E clangd -E build -E lib
+                fd -a -t d -d 1 . "$current_dir" -HI -E .git -E .venv -E node_modules -E __pycache__ -E clangd -E build -E lib -E Library -E Temp
             } | fzf \
                 --height=100% --layout=reverse --border=sharp \
                 --prompt="∷ ${current_dir%/}/" \
