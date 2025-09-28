@@ -30,7 +30,8 @@ source $ZSH_DIR/functions/directory.zsh
 # Aliases
 alias nf='neofetch'
 alias ff='fastfetch'
-alias vi='vim'
+alias nvim='NVIM_APPNAME=nvim-chad nvim'
+alias vi='nvim'
 alias ls='lsd'
 alias clear='clear && printf "\e[3J"'
 alias template="$HOME/.config/scripts/template.sh"
