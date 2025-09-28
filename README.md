@@ -1,5 +1,5 @@
 # duck-zsh
-duck-zsh is my personal zsh configuration.
+duck-zsh is my personal Zsh configuration.
 
 ## Table of Contents
 - [Getting Started](#getting-started)
@@ -13,15 +13,20 @@ duck-zsh is my personal zsh configuration.
 This section will guide you through installing *duck-zsh*.
 
 ### Requirements
-* [fzf](https://github.com/junegunn/fzf) is required for custom zsh functions.
+* [oh-my-zsh](https://ohmyz.sh/) manages your Zsh configuration.
+* [fzf](https://github.com/junegunn/fzf) is required for custom Zsh functions.
 
 ### Installation
+After you have met the requirements, proceed to following the installation steps.
+
+<br>
+
 Clone the repository using the following command:
 ```sh
 # Make .config directory if your system doesn't already have one
 mkdir -p $HOME/.config
 
-# Remove the existing zsh configuration
+# Remove the existing Zsh configuration
 rm -rf $HOME/.config/zsh
 
 # Clone my repo
@@ -29,13 +34,13 @@ git clone https://github.com/DuckyShine004/duck-zsh.git $HOME/.config/zsh
 ```
 
 > [!WARNING]
-> If you already have a zsh setup, make sure to back it up before proceeding further. 
+> If you already have a Zsh setup, make sure to back it up before proceeding further. 
 
 After cloning the repository:
 1) Run the `install.sh` script:
 
 ```sh
-# Go into zsh directory
+# Go into Zsh directory
 cd $HOME/.config/zsh
 
 # Grant the installation script executable permissions
@@ -45,7 +50,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-2) Create symlinks for zsh configuration files:
+2) Create symlinks for Zsh configuration files:
 ```sh
 ln -s $HOME/.config/zsh $HOME/.zshenv
 
@@ -63,7 +68,7 @@ source $HOME/.zshrc
 > If sourcing fails, it's likely due to missing dependencies (e.g., `pyenv`) . Install the required packages and re-source the configuration.
 
 ## Plugins
-These are the plugins I use for my zsh configuration:
+These are the plugins I use for my Zsh configuration:
 * [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 * [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)
 * [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
