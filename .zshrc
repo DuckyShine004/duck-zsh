@@ -76,5 +76,10 @@ eval "$(pyenv init -)"
 # SDKMAN (must be at EOF)
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# History
+setopt append_history
+setopt hist_ignore_dups
+setopt share_history
+
 # Custom display script
 pokemon-colorscripts --no-title -n psyduck
