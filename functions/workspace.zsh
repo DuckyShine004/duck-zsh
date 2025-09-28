@@ -23,7 +23,7 @@ function workspace-open() {
     selection=$(
         awk 'BEGIN{FS="=";OFS="\t"} NF {p=$0; sub(/^[^=]*=/,"",p); print $1,p}' ~/.workspaces |
             fzf \
-                --height=60% \
+                --height=100% \
                 --border=sharp \
                 --layout=reverse \
                 --prompt='∷ ' \
@@ -41,7 +41,7 @@ function workspace-open() {
             echo \"Missing directory: \$path\"
           fi
         " _ {2}' \
-                --preview-window=right,50%:wrap
+                --preview-window=right,80%:wrap
     ) || {
         echo "No workspace selected."
 

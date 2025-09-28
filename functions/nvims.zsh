@@ -14,6 +14,7 @@ function nvims() {
 
     if [[ -z $config ]]; then
         echo "Nothing selected"
+
         return 0
     elif [[ $config == "default" ]]; then
         config="nvim"
@@ -22,8 +23,4 @@ function nvims() {
     NVIM_APPNAME=$config nvim $@
 
     echo NVIM_APPNAME
-}
-
-function kitty-reload() {
-    kill -SIGUSR1 $KITTY_PID
 }
