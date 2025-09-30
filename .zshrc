@@ -47,6 +47,13 @@ export PYENV_ROOT="$HOME/.pyenv"
 # Python path
 export PYTHONPATH="$(python3 -m site --user-site):$PYTHONPATH"
 
+# CPP
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/openal-soft/lib/pkgconfig:${PKG_CONFIG_PATH}"
+
+# Mac CPP headers and libs
+# export CPPFLAGS="-I/opt/homebrew/opt/openal-soft/include ${CPPFLAGS}"
+# export LDFLAGS="-L/opt/homebrew/opt/openal-soft/lib ${LDFLAGS}"
+
 # Path variables
 typeset -U path
 
