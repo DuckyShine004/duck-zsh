@@ -6,3 +6,6 @@
 
 # zsh history
 .zsh_history
+
+# zsh sessions
+.zsh_sessions/
