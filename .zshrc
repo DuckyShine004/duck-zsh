@@ -26,6 +26,7 @@ source $ZSH_DIR/functions/nvims.zsh
 source $ZSH_DIR/functions/workspace.zsh
 source $ZSH_DIR/functions/file.zsh
 source $ZSH_DIR/functions/directory.zsh
+source $ZSH_DIR/functions/yazi.zsh
 
 # Aliases
 alias nf='neofetch'
