@@ -89,5 +89,6 @@ setopt append_history
 setopt hist_ignore_dups
 setopt share_history
 
-# Custom display script
-pokemon-colorscripts --no-title -n psyduck
+# Custom entry (use fastfetch)
+# pokemon-colorscripts --no-title -n psyduck
+ff
