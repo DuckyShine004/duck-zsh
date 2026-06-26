@@ -4,7 +4,7 @@ export ZSH="$ZSH_DIR/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 # Set the theme
-ZSH_THEME="dragosmara"
+ZSH_THEME="duckyshine"
 
 # Disable automatic terminal title
 DISABLE_AUTO_TITLE="true"
