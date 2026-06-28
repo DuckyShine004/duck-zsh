@@ -29,32 +29,6 @@ DUCKY_PEACH="#fab387"
 DUCKY_LEFT_ROUND=""
 DUCKY_RIGHT_ROUND=""
 
-# -----------------------------
-# Truecolor helpers
-# -----------------------------
-
-function ducky_fg() {
-    echo -n "%F{$1}"
-}
-
-function ducky_bg() {
-    echo -n "%K{$1}"
-}
-
-function ducky_clear() {
-    echo -n "%k%f"
-}
-
-# Usage:
-# ducky_segment bg fg "content"
-function ducky_segment() {
-    local bg="$1"
-    local fg="$2"
-    local content="$3"
-
-    echo -n "%F{$bg}${DUCKY_LEFT_ROUND}%K{$bg}%F{$fg}${content}%k%F{$bg}${DUCKY_RIGHT_ROUND}%f"
-}
-
 # Left edge segment joined into the next segment.
 # Draws the right separator using the next segment's background.
 function ducky_segment_left_edge_join() {
@@ -64,15 +38,6 @@ function ducky_segment_left_edge_join() {
     local content="$4"
 
     echo -n "%K{$bg}%F{$fg}${content}%K{$next_bg}%F{$bg}${DUCKY_RIGHT_ROUND}%f"
-}
-
-# Right edge segment: only left round, no right round.
-function ducky_segment_right_edge() {
-    local bg="$1"
-    local fg="$2"
-    local content="$3"
-
-    echo -n "%F{$bg}${DUCKY_LEFT_ROUND}%K{$bg}%F{$fg}${content}%k%f"
 }
 
 # Right edge two-part segment:
@@ -87,6 +52,31 @@ function ducky_segment_right_edge_pair() {
     local right_content="$6"
 
     echo -n "%F{$left_bg}${DUCKY_LEFT_ROUND}%K{$left_bg}%F{$left_fg}${left_content}%K{$right_bg}%F{$left_bg}${DUCKY_RIGHT_ROUND}%F{$right_fg}${right_content}%k%f"
+}
+
+# Right edge four-part status segment:
+# error icon | exit code | time icon | duration
+# Final duration block has no right round and flushes to terminal edge.
+function ducky_segment_right_edge_status_time() {
+    local error_icon_bg="$1"
+    local error_icon_fg="$2"
+    local exit_bg="$3"
+    local exit_fg="$4"
+    local time_icon_bg="$5"
+    local time_icon_fg="$6"
+    local duration_bg="$7"
+    local duration_fg="$8"
+    local error_icon="$9"
+    local exit_code="${10}"
+    local time_icon="${11}"
+    local duration="${12}"
+
+    echo -n "%F{$error_icon_bg}${DUCKY_LEFT_ROUND}"
+    echo -n "%K{$error_icon_bg}%F{$error_icon_fg}${error_icon}"
+    echo -n "%K{$exit_bg}%F{$error_icon_bg}${DUCKY_RIGHT_ROUND}%F{$exit_fg}${exit_code}"
+    echo -n "%F{$time_icon_bg}${DUCKY_LEFT_ROUND}"
+    echo -n "%K{$time_icon_bg}%F{$time_icon_fg}${time_icon}"
+    echo -n "%K{$duration_bg}%F{$time_icon_bg}${DUCKY_RIGHT_ROUND}%F{$duration_fg}${duration}%k%f"
 }
 
 # Middle/right-adjacent segment: no left round, only right round.
@@ -105,28 +95,11 @@ function ducky_gap() {
 }
 
 # -----------------------------
-# Git status icons
-# -----------------------------
-
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%F{$DUCKY_RED}⚡%f"
-ZSH_THEME_GIT_PROMPT_AHEAD="%F{$DUCKY_RED}!%f"
-ZSH_THEME_GIT_PROMPT_CLEAN="%F{$DUCKY_GREEN}✓%f"
-
-ZSH_THEME_GIT_PROMPT_ADDED="%F{$DUCKY_GREEN}✚%f"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%F{$DUCKY_BLUE}✹%f"
-ZSH_THEME_GIT_PROMPT_DELETED="%F{$DUCKY_RED}✖%f"
-ZSH_THEME_GIT_PROMPT_RENAMED="%F{$DUCKY_MAUVE}➜%f"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%F{$DUCKY_YELLOW}═%f"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$DUCKY_SKY}✭%f"
-
-# -----------------------------
 # Prompt char
 # -----------------------------
 
 function ducky_prompt_char() {
-    echo -n "%F{$DUCKY_YELLOW} ╰%f"
+    echo -n "%F{$DUCKY_YELLOW} ╰%f"
 }
 
 # -----------------------------
@@ -296,7 +269,7 @@ add-zsh-hook preexec ducky_preexec
 add-zsh-hook precmd ducky_precmd
 
 function ducky_cmd_time() {
-    if [[ -n "$DUCKY_CMD_DURATION" ]]; then
+    if [[ "$DUCKY_LAST_EXIT_CODE" == "0" && -n "$DUCKY_CMD_DURATION" ]]; then
         ducky_segment_right_edge_pair \
             "$DUCKY_MAUVE" "$DUCKY_BG" \
             "$DUCKY_BG" "$DUCKY_TEXT" \
@@ -305,8 +278,18 @@ function ducky_cmd_time() {
 }
 
 function ducky_return_status() {
-    if [[ "$DUCKY_LAST_EXIT_CODE" != "0" ]]; then
-        ducky_segment "$DUCKY_RED" "$DUCKY_BG" " ⏎ ${DUCKY_LAST_EXIT_CODE} "
+    if [[ "$DUCKY_LAST_EXIT_CODE" != "0" && -n "$DUCKY_CMD_DURATION" ]]; then
+        ducky_segment_right_edge_status_time \
+            "$DUCKY_RED" "$DUCKY_BG" \
+            "$DUCKY_BG" "$DUCKY_TEXT" \
+            "$DUCKY_MAUVE" "$DUCKY_BG" \
+            "$DUCKY_BG" "$DUCKY_TEXT" \
+            "  " " ${DUCKY_LAST_EXIT_CODE} " "  " " ${DUCKY_CMD_DURATION} "
+    elif [[ "$DUCKY_LAST_EXIT_CODE" != "0" ]]; then
+        ducky_segment_right_edge_pair \
+            "$DUCKY_RED" "$DUCKY_BG" \
+            "$DUCKY_BG" "$DUCKY_TEXT" \
+            "  " " ${DUCKY_LAST_EXIT_CODE} "
     fi
 }
 

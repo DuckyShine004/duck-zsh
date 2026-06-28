@@ -9,3 +9,5 @@
 
 # zsh sessions
 .zsh_sessions/
+
+.DS_Store
